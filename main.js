@@ -104,3 +104,5 @@ changeFoodPosition();
 //--------------speed of the snake
 setIntervalId = setInterval(initGame, 125);
 document.addEventListener("keydown", changeDirection);
+
+//
