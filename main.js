@@ -37,15 +37,27 @@ const initGame = () => {
   if (snakeX === foodX && snakeY === foodY) {
     changeFoodPosition();
     snakeBody.push([foodX, foodY]); //pushing foodpostion to snake body array
+    console.log(snakeBody);
   }
+
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    //shifting forward the values of the elem in the snake body by one
+    snakeBody[i] = snakeBody[i - 1];
+  }
+
+  snakeBody[0] = [snakeX, snakeY]; //settting first elem of snake body to current snake position
 
   //Updating snakes head based on current velocity
   snakeX += velocityX;
   snakeY += velocityY;
 
-  htmlMarkup += `<div class="head" style= "grid-area: ${snakeY} / ${snakeX} "></div>`;
+  for (let i = 0; i < snakeBody.length; i++) {
+    //adding a div for each part of the snakes body
+    htmlMarkup += `<div class="head" style= "grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]} "></div>`;
+  }
   playBoard.innerHTML = htmlMarkup;
 };
+
 changeFoodPosition();
 //--------------speed of the snake
 setInterval(initGame, 125);
